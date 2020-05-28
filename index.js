@@ -3,11 +3,29 @@ const fs = require("fs");
 const generateMarkdown = require("./generateMarkdown.js");
 
 const questions = [
-    // takes a few words to 
+    {
+        type: 'input',
+        name: 'username',
+        message: "Username: ",
+        validate: function(name){
+            return name !== '';
+        }
+    }, 
+    {
+        type: 'input',
+        name: 'repo',
+        message: "Repo: ",
+        validate: function(name){
+            return name !== '';
+        }
+    },    
     {
         type: 'input',
         name: 'title',
-        message: "Title: "
+        message: "Title: ",
+        validate: function(name){
+            return name !== '';
+        }
     },
     // todo test out type: 'editor' which should open the editor of choice
     {
@@ -38,11 +56,6 @@ const questions = [
     // will need to take multiple separate inputs
     {
         type: 'input',
-        name: 'table',
-        message: "Table of Contents: "
-    },
-    {
-        type: 'input',
         name: 'badges',
         message: 'Badges: '
     },
@@ -52,6 +65,12 @@ const questions = [
         message: "Contributor: "
     },
     // yes/no q
+    {
+        type: 'list',
+        name: 'table',
+        message: "Table of Contents? ",
+        choices: ['Yes', 'No']
+    },
     {
         type: 'list',
         name: 'picture',

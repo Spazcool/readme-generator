@@ -1,37 +1,83 @@
 const shields = require('shields')();
+const axios = require('axios');
+
+
+
+
+function createTable(data){
+  let stringed = data.map((item, index) => `${index + 1}. [${item}](#${item})`).join('\n');
+  return stringed;
+}
 
 function generateMarkdown(data) {
-  let {title, description, installation, usage, table, tests, badges, contributors, picture, email} = data; 
-  let thing = shields('travis', {
-    repo: 'KenanY/shields'
+  let {title, description, installation, usage, table, tests, badges, contributors, picture, email, username} = data;
+  let keys = Object.keys(data);
+  let include = keys.filter((key) => {
+    // REMOVE UNDESIRABLE ITEMS
+    if(key != 'table' && key != 'badges' && key != 'title' && data[key] != 'No'){
+      // RETURN IF TRUTHY
+      return data[key]
+    }
   });
+  if(picture == 'Yes'){
+    data.picture = `https://github.com/${username}.png`;
+  }
+  if(email == 'Yes'){
+
+    data.email = axios.get(`https://api.github.com/users/${username}`, {
+        headers: {
+          'Authorization': `token 011dd9044491c09d9aefa250751bc1b7f42ffab6`
+        }
+      })
+    .then(function (response) {
+      // handle success
+      console.log(response);
+      return response.data;
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+    
+    // `https://github.com/${username}.png`;
+  }
+
+  let contents = include.map((content) => `## ${content}\n${data[content]}`).join('\n');
+  let toc = table ? createTable(include) : '';
+
+  // let thing = shields('travis', {
+  //   repo: 'KenanY/shields'
+  // });
+  // [![${badges}](${thing.image})](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+
   return `
 # ${title}
-[![${badges}](${thing.image})](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
-
-
-${description}
+${description ? description : ''}
 ---
-## Table of Contents
-${table}
-## Installation
-${installation}
-## Usage
-${usage}
-## Tests
-${tests}
-## Contributors
-${contributors}
-## Picture
-${picture}
-## Email
-${email}
-  `;
+${ toc }
+${ contents }
+`;
 }
 
 module.exports = generateMarkdown;
 
-
+// ## Table of Contents
+// ${ contents }
+// ## Installation
+// ${installation}
+// ## Usage
+// ${usage}
+// ## Tests
+// ${tests}
+// ## Contributors
+// ${contributors}
+// ## Picture
+// ${picture }
+// ## Email
+// ${email}
 // # Welcome to Spazcool's [Portfolio Page](http://www.spazcool.com/)
 
 // This is where I am hosting the best work I've done thus far in my coding journey. Always a work in progress, expect changes.
