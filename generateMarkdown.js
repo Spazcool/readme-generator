@@ -1,16 +1,23 @@
 const shields = require('shields')();
 const axios = require('axios');
 
-
-
+async function loadUser(user){
+  return await axios.get(`https://api.github.com/users/${user}`, {
+    headers: { 'Authorization': `token ${process.env.token}`}
+  })
+  .then((response) => response.data )
+  .catch((error) => error )
+}
 
 function createTable(data){
   let stringed = data.map((item, index) => `${index + 1}. [${item}](#${item})`).join('\n');
   return stringed;
 }
 
-function generateMarkdown(data) {
+async function generateMarkdown(data) {
   let {title, description, installation, usage, table, tests, badges, contributors, picture, email, username} = data;
+  let user = await loadUser(username);
+  console.log(typeof contributors)
   let keys = Object.keys(data);
   let include = keys.filter((key) => {
     // REMOVE UNDESIRABLE ITEMS
@@ -19,30 +26,12 @@ function generateMarkdown(data) {
       return data[key]
     }
   });
+
   if(picture == 'Yes'){
-    data.picture = `https://github.com/${username}.png`;
+    data.picture = `![](${user.avatar_url})`;
   }
   if(email == 'Yes'){
-
-    data.email = axios.get(`https://api.github.com/users/${username}`, {
-        headers: {
-          'Authorization': `token 011dd9044491c09d9aefa250751bc1b7f42ffab6`
-        }
-      })
-    .then(function (response) {
-      // handle success
-      console.log(response);
-      return response.data;
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
-    
-    // `https://github.com/${username}.png`;
+    data.email = `[${user.email}]('mailto:${user.email}')`;
   }
 
   let contents = include.map((content) => `## ${content}\n${data[content]}`).join('\n');

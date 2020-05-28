@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const generateMarkdown = require("./generateMarkdown.js");
+require('dotenv').config();
 
 const questions = [
     {
@@ -62,7 +63,7 @@ const questions = [
     {
         type: 'input',
         name: 'contributors',
-        message: "Contributor: "
+        message: "Contributors (Github Usernames): "
     },
     // yes/no q
     {
@@ -89,10 +90,10 @@ function writeToFile(fileName, data) {
     fs.writeFileSync(`${fileName}.md`, data);
 }
 
-function askQuestions(questions){
-    inquirer.prompt(questions).then(answers => {
+async function askQuestions(questions){
+    inquirer.prompt(questions).then(async (answers) => {
         // JSON.stringify(answers, null, '  ')
-        let marked = generateMarkdown(answers);
+        let marked = await generateMarkdown(answers);
         console.log(marked)
         writeToFile('README-yo', marked);
     });
