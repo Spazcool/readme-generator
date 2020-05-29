@@ -28,12 +28,6 @@ const questions = [
             return name !== '';
         }
     },
-      // will need to take multiple separate inputs
-      {
-        type: 'input',
-        name: 'badges',
-        message: 'Badges: '
-    },
     // todo test out type: 'editor' which should open the editor of choice
     {
         type: 'input',
@@ -63,6 +57,11 @@ const questions = [
     },
     {
         type: 'input',
+        name: 'contributing',
+        message: "Contributing: "
+    },
+    {
+        type: 'input',
         name: 'contributors',
         message: "Contributors (Github Usernames, comma separated): "
     },
@@ -70,32 +69,22 @@ const questions = [
         type: 'input',
         name: 'license',
         message: 'License: '
-    },
-    // yes/no q
-    {
-        type: 'list',
-        name: 'picture',
-        message: 'Include Profile Pictures? ',
-        choices: ['Yes', 'No']
-    },
-    {
-        type: 'list',
-        name: 'email',
-        message: 'Include Profile emails? ',
-        choices: ['Yes', 'No']
     }
 ];
 
-function writeToFile(fileName, data) {
-    fs.writeFileSync(`${fileName}.md`, data);
+function writeToFile(dirName, data) {
+    fs.mkdirSync(`${process.cwd()}/readmes/${dirName}`, {recursive: true}, (error) => {
+        if(error){console.log(error)}
+        else{
+            fs.writeFileSync(`/readmes/${dirName}/README.md`, data);
+        }
+    });
 }
 
 async function askQuestions(questions){
     inquirer.prompt(questions).then(async (answers) => {
-        // JSON.stringify(answers, null, '  ')
         let marked = await generateMarkdown(answers);
-        console.log(marked)
-        writeToFile('README-yo', marked);
+        writeToFile(`${answers.title}`, marked);
     });
 }
 
