@@ -28,11 +28,23 @@ const questions = [
             return name !== '';
         }
     },
+      // will need to take multiple separate inputs
+      {
+        type: 'input',
+        name: 'badges',
+        message: 'Badges: '
+    },
     // todo test out type: 'editor' which should open the editor of choice
     {
         type: 'input',
         name: 'description',
         message: "Description: "
+    },
+    {
+        type: 'list',
+        name: 'table',
+        message: "Table of Contents? ",
+        choices: ['Yes', 'No']
     },
     {
         type: 'input',
@@ -46,42 +58,30 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'license',
-        message: 'License: '
-    },
-    {
-        type: 'input',
         name: 'tests',
         message: 'Tests: '
-    },
-    // will need to take multiple separate inputs
-    {
-        type: 'input',
-        name: 'badges',
-        message: 'Badges: '
     },
     {
         type: 'input',
         name: 'contributors',
-        message: "Contributors (Github Usernames): "
+        message: "Contributors (Github Usernames, comma separated): "
+    },
+    {
+        type: 'input',
+        name: 'license',
+        message: 'License: '
     },
     // yes/no q
     {
         type: 'list',
-        name: 'table',
-        message: "Table of Contents? ",
-        choices: ['Yes', 'No']
-    },
-    {
-        type: 'list',
         name: 'picture',
-        message: 'Include Profile Picture? ',
+        message: 'Include Profile Pictures? ',
         choices: ['Yes', 'No']
     },
     {
         type: 'list',
         name: 'email',
-        message: 'Include Profile email? ',
+        message: 'Include Profile emails? ',
         choices: ['Yes', 'No']
     }
 ];
