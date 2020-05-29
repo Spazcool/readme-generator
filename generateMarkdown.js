@@ -12,12 +12,16 @@ async function loadUser(user){
 
 async function createUserLink(data){
   // todo add initual username to this list as well
+  // remove duplicates, if somone puts their name in twice
   let people = data.contributors.split(',');
   let arr = [];
  
   for (person of people) {
     let user = await loadUser(person.trim());
-    arr.push(`[![${user.email}](${user.avatar_url})(${user.html_url})]`);
+    // ${user.email}
+    // arr.push(`[![${user.email}](${user.avatar_url})(${user.html_url})]`);
+    arr.push(`<a href=${user.html_url}><img src=${user.avatar_url} style="border-radius: 50%; width: 3em;"/></a>`);
+
   }
   return arr.join(' ');
 }
@@ -80,7 +84,7 @@ async function formatContent(keys, data){
     }
   };
   console.log(arr)
-  return arr.join('---\n');
+  return arr.join('\n---\n');
 }
 
 async function generateMarkdown(data) {
