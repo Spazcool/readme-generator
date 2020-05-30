@@ -10,14 +10,15 @@ async function loadUser(user){
 }
 
 async function createUserLink(data){
-  // TODO remove duplicates, if somone puts their name in twice
+  let arr = [];
   let people = data.contributors.split(',');
   people.unshift(data.username);
-
-  let arr = [];
+  let cleaned = [...new Set(people)] // Set only allows unique values, cuts out duplicates
+    .map((item) => item.replace(/\s/gi, '')) // Remove whitespce, Github doesn't allow
+    .filter((item) => item.length > 0); // Remove blanks
  
-  for (person of people) {
-    let user = await loadUser(person.trim());
+  for (person of cleaned) {
+    let user = await loadUser(person);
     arr.push(`<a href="${user.html_url}"><img src="${user.avatar_url}" title="${user.login}" style="border-radius: 50%; width: 3em;"/></a>`);
   }
   return arr.join(' ');
