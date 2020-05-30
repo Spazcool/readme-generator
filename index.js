@@ -57,6 +57,11 @@ const questions = [
     },
     {
         type: 'input',
+        name: 'questions',
+        message: 'Questions? Who to contact?: '
+    },
+    {
+        type: 'input',
         name: 'contributing',
         message: "Contributing: "
     },
@@ -75,10 +80,8 @@ const questions = [
 function writeToFile(dirName, data) {
     fs.mkdirSync(`${process.cwd()}/readmes/${dirName}`, {recursive: true}, (error) => {
         if(error){console.log(error)}
-        else{
-            fs.writeFileSync(`/readmes/${dirName}/README.md`, data);
-        }
     });
+    fs.writeFileSync(`${process.cwd()}/readmes/${dirName}/README.md`, data);
 }
 
 async function askQuestions(questions){

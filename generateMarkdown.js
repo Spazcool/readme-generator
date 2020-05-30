@@ -1,4 +1,5 @@
 const axios = require('axios');
+const badges = require('./generateBadges.js');
 
 async function loadUser(user){
   return await axios.get(`https://api.github.com/users/${user}`, {
@@ -9,15 +10,14 @@ async function loadUser(user){
 }
 
 async function createUserLink(data){
-  // todo add initual username to this list as well
   // TODO remove duplicates, if somone puts their name in twice
   let people = data.contributors.split(',');
+  people.unshift(data.username);
+
   let arr = [];
  
   for (person of people) {
     let user = await loadUser(person.trim());
-    // ${user.email}
-    // arr.push(`[![${user.email}](${user.avatar_url})(${user.html_url})]`);
     arr.push(`<a href="${user.html_url}"><img src="${user.avatar_url}" title="${user.login}" style="border-radius: 50%; width: 3em;"/></a>`);
   }
   return arr.join(' ');
@@ -41,14 +41,13 @@ function includeIt(data){
   return keys;
 }
 
-// todo remove the async
 async function formatContent(keys, data){
   let arr = [];
 
   for (key of keys) {
     switch(key){
-      case 'title': 
-        arr.push(`# ${data.title}\n[![Generic badge](https://img.shields.io/badge/<SUBJECT>-<STATUS>-<COLOR>.svg)](https://shields.io/)\n---`);
+      case 'title':
+        arr.push(`# ${data.title}\n${badges()}\n---`);
         break;
       case 'description':
         arr.push(data.description);
@@ -64,6 +63,9 @@ async function formatContent(keys, data){
         break;
       case 'tests':
         arr.push(`## Tests\n---\n${data.tests}`);
+        break;
+      case 'questions':
+        arr.push(`## Got questions?\n---\n${data.tests}`);
         break;
       case 'contributing':
         arr.push(`## Contributing\n---\n${data.contributing}`);
