@@ -33,6 +33,7 @@ function createTable(keys){
     ){
       return item;
     }})
+    //todo uppercase first letters
   .map((item, index) => `${index + 1}. [${item}](#${item})`).join('\n');
   return stringed;
 }

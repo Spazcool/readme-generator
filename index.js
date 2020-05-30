@@ -7,7 +7,7 @@ const questions = [
     {
         type: 'input',
         name: 'username',
-        message: "Username: ",
+        message: "GitHub Username: ",
         validate: function(name){
             return name !== '';
         }
@@ -28,9 +28,8 @@ const questions = [
             return name !== '';
         }
     },
-    // todo test out type: 'editor' which should open the editor of choice
     {
-        type: 'input',
+        type: 'editor',
         name: 'description',
         message: "Description: "
     },
@@ -41,29 +40,29 @@ const questions = [
         choices: ['Yes', 'No']
     },
     {
-        type: 'input',
+        type: 'editor',
         name: 'installation',
         message: "Installation: "
     },
     {
-        type: 'input',
+        type: 'editor',
         name: 'usage',
         message: "Usage: "
     },
     {
-        type: 'input',
+        type: 'editor',
         name: 'tests',
         message: 'Tests: '
     },
     {
-        type: 'input',
+        type: 'editor',
         name: 'questions',
         message: 'Questions? Who to contact?: '
     },
     {
-        type: 'input',
+        type: 'editor',
         name: 'contributing',
-        message: "Contributing: "
+        message: "Contributing. How can others help?: "
     },
     {
         type: 'input',
@@ -71,7 +70,7 @@ const questions = [
         message: "Contributors (Github Usernames, comma separated): "
     },
     {
-        type: 'input',
+        type: 'editor',
         name: 'license',
         message: 'License: '
     }
