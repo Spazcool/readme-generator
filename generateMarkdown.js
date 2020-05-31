@@ -21,6 +21,7 @@ async function createUserLink(data){
     let user = await loadUser(person);
     arr.push(`<a href="${user.html_url}"><img src="${user.avatar_url}" title="${user.login}" style="border-radius: 50%; width: 3em;"/></a>`);
   }
+
   return arr.join(' ');
 }
 
@@ -33,7 +34,7 @@ function createTable(keys){
     ){
       return item;
     }})
-    //todo uppercase first letters
+//todo uppercase first letters
   .map((item, index) => `${index + 1}. [${item}](#${item})`).join('\n');
   return stringed;
 }
