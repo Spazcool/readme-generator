@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { makeBadge, ValidationError } = require('badge-maker')
+// const { makeBadge, ValidationError } = require('badge-maker')
 
 function getFileTypes(path){
     let arr = fs.readdirSync(path)

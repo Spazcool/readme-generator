@@ -1,20 +1,18 @@
 {
   "name": "readme-generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple CLI application that assists in the creation of a consistent README. Leveraging Inquirer, the user is asked a series of quesitons, their answers providing the text styled & saved to a new README file. This app runs in a Node environment.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "makeReadme": "node index.js"
   },
   "author": "Douglas Wright",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
-    "badge-maker": "^3.0.0",
-    "camelcase": "^6.0.0",
     "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
-    "inquirer": "^7.1.0",
-    "shields": "^2.1.0"
+    "inquirer": "^7.1.0"
   }
 }
