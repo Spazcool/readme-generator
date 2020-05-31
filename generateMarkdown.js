@@ -19,9 +19,8 @@ async function createUserLink(data){
  
   for (person of cleaned) {
     let user = await loadUser(person);
-    arr.push(`<a href="${user.html_url}"><img src="${user.avatar_url}" title="${user.login}" style="border-radius: 50%; width: 3em;"/></a>`);
+    arr.push(`<a href="${user.html_url}"><img src="${user.avatar_url}" title="${user.login}" width="10%"/></a>`);
   }
-
   return arr.join(' ');
 }
 
@@ -56,25 +55,25 @@ async function formatContent(keys, data){
         arr.push(data.description);
         break;
       case 'table':
-        arr.push(`## Table of Contents\n---\n${createTable(keys)}`);
+        arr.push(`## Table of Contents\n${createTable(keys)}`);
         break;
       case 'installation':
-        arr.push(`## Installation\n---\n${data.installation}`);
+        arr.push(`## Installation\n${data.installation}`);
         break;
       case 'usage':
-        arr.push(`## Usage\n---\n${data.usage}`);
+        arr.push(`## Usage\n${data.usage}`);
         break;
       case 'tests':
-        arr.push(`## Tests\n---\n${data.tests}`);
+        arr.push(`## Tests\n${data.tests}`);
         break;
       case 'questions':
-        arr.push(`## Got questions?\n---\n${data.tests}`);
+        arr.push(`## Got questions?\n${data.tests}`);
         break;
       case 'contributing':
-        arr.push(`## Contributing\n---\n${data.contributing}`);
+        arr.push(`## Contributing\n${data.contributing}`);
         break;
       case 'contributors':
-        arr.push(`## Contributors\n---\n${await createUserLink(data)}`);
+        arr.push(`## Contributors\n${await createUserLink(data)}`);
         break;
       default:
         break;
