@@ -21,11 +21,11 @@ npm install
 npm run makeReadme
 ```
 
-### Prerequisites
+## Prerequisites
 
 * Node.js
 
-### Installing
+## Installing
 
 As stated above, you'll need to install the dependencies after cloning the repo.
 
