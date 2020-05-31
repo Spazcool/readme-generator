@@ -18,6 +18,24 @@ function getFileTypes(path){
 }
 
 // for each file type, generate a badge, with a percentage of rep of the directory
+// function assignTypesToBadge(files){
+//     let arr = [];
+//     let obj = {};
+//     let total = files.length;
+
+//     files.forEach((file) => { obj[file] = (obj[file] || 0) + 1; });
+
+//     for(type in obj){
+//         let format = {
+//             label: `${type}`,
+//             message: `${Math.floor((obj[type]/total) * 100)}%  `,
+//             color: `#${Math.floor(Math.random()*16777215).toString(16)}`,
+//         }
+//         arr.push(makeBadge(format))
+//     }
+
+//     return arr.join(" ");
+// }
 function assignTypesToBadge(files){
     let arr = [];
     let obj = {};
@@ -26,12 +44,13 @@ function assignTypesToBadge(files){
     files.forEach((file) => { obj[file] = (obj[file] || 0) + 1; });
 
     for(type in obj){
-        let format = {
-            label: `${type}`,
-            message: `${Math.floor((obj[type]/total) * 100)}%  `,
-            color: `#${Math.floor(Math.random()*16777215).toString(16)}`,
-        }
-        arr.push(makeBadge(format))
+        let format = `[![Generic badge](https://img.shields.io/badge/${type}-${Math.floor((obj[type]/total) * 100)}%-red.svg)](https://shields.io/)`;
+        // {
+        //     label: `${type}`,
+        //     message: `${Math.floor((obj[type]/total) * 100)}%  `,
+        //     color: `#${Math.floor(Math.random()*16777215).toString(16)}`,
+        // }
+        arr.push(format)
     }
 
     return arr.join(" ");
