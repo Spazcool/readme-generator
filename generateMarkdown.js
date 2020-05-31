@@ -55,7 +55,7 @@ async function formatContent(keys, data){
         arr.push(data.description);
         break;
       case 'table':
-        arr.push(`## Table of Contents\n${createTable(keys)}`);
+        arr.push(`## Table of Contents\n${createTable(keys)}\n`);
         break;
       case 'installation':
         arr.push(`## Installation\n${data.installation}`);
