@@ -2,8 +2,9 @@
 A simple CLI application that assists in the creation of a consistent README. Leveraging Inquirer, the user is asked a series of quesitons, their answers providing the text styled & saved to a new README file. This app runs in a Node environment.
 
 <p align="center">
-   <img width="70%" height="300vh" src="./images/desktop.gif">
-   <img width="20%" height="300vh" src="./images/mobile.gif">
+   <img width="70%" height="300vh" src="./images/terminal.png">
+   <img width="70%" height="300vh" src="./images/editor.png">
+   <img width="70%" height="300vh" src="./images/github.png">
 </p>
 
 ## Getting Started

@@ -81,12 +81,13 @@ function writeToFile(dirName, data) {
         if(error){console.log(error)}
     });
     fs.writeFileSync(`${process.cwd()}/readmes/${dirName}/README.md`, data);
+    console.log(`\nREADME is complete.\nIt is located: ${process.cwd()}/readmes/${dirName}/README.md`);
 }
 
 async function askQuestions(questions){
     inquirer.prompt(questions).then(async (answers) => {
         let marked = await generateMarkdown(answers);
-        writeToFile(`${answers.title}`, marked);
+        writeToFile(`${answers.repo}`, marked);
     });
 }
 
